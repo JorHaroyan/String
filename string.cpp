@@ -48,6 +48,22 @@ String& String::operator=(const String& other) {
 }
 
 
+String& String::operator=(String&& other) {
+    if (*this == other) {
+        return *this;
+    }
+    if (other.m_size != m_size) {
+        delete[] m_str;
+        m_str = other.m_str;
+        m_size = other.m_size;
+    }
+    delete[] other.m_str;    
+
+    return *this;
+}
+
+
+
 bool String::operator==(const String& other) {
     if (m_size != other.m_size) {
         return false;
